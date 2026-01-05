@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Appwrite Form</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 30px;
+    width: 360px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    animation: fadeIn 0.8s ease;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #666;
+  }
+
+  textarea {
+    resize: none;
+    height: 90px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+</head>
+<body>
+
+  <div class="box">
+    <h2>Contact Form</h2>
+    <form id="form">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+      <textarea id="message" placeholder="Message"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
+<script>
+  const client = new Appwrite.Client();
+  const databases = new Appwrite.Databases(client);
+
+  client
+    .setEndpoint("https://fra.cloud.appwrite.io/v1")
+    .setProject("695b7b000007429e1df8");
+
+  const form = document.getElementById("form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nameValue = document.getElementById("name").value.trim();
+    const emailValue = document.getElementById("email").value.trim();
+    const phoneValue = document.getElementById("phone").value.trim();
+    const messageValue = document.getElementById("message").value.trim();
+
+    try {
+      await databases.createDocument(
+        "695bec840025811fdb4f",          // Database ID (correct)
+        "login_data",     // Collection ID (important)
+        Appwrite.ID.unique(),
+        {
+          name: nameValue,
+          email: emailValue,
+          phone:phoneValue,
+          message: messageValue
+        }
+      );
+
+      alert("Form submitted successfully!");
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  });
+</script>
+
+
+</body>
+</html>
