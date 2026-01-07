@@ -19,7 +19,7 @@
   }
 
   .box {
-    background: rgba(255, 255, white, 0.15);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 30px;
@@ -28,6 +28,7 @@
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
     color: #fff;
     animation: fadeIn 0.8s ease;
+    text-align: center;
   }
 
   h2 {
@@ -94,13 +95,21 @@
 
   <div class="box">
     <h2>Contact Form</h2>
+
     <form id="form">
       <input type="text" id="name" placeholder="Name" required>
       <input type="email" id="email" placeholder="Email" required>
       <input type="tel" id="phone" placeholder="Phone Number" required>
       <textarea id="message" placeholder="Message"></textarea>
+
       <button type="submit">Submit</button>
+
+      
+      <p style="margin-top:8px;color:#fff;font-size:13px;">
+        Created by Mama Salgar
+      </p>
     </form>
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
@@ -124,8 +133,8 @@
 
     try {
       await databases.createDocument(
-        "695bec840025811fdb4f",          
-        "login_data",     
+        "695bec840025811fdb4f",
+        "login_data",
         Appwrite.ID.unique(),
         {
           name: nameValue,
@@ -143,8 +152,6 @@
     }
   });
 </script>
-
-<p style="text-align:center;margin-top:10px;color:#fff;">Created by Mama Salgar</p>
 
 </body>
 </html>
