@@ -19,7 +19,7 @@
   }
 
   .box {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, white, 0.15);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 30px;
@@ -124,8 +124,8 @@
 
     try {
       await databases.createDocument(
-        "695bec840025811fdb4f",          // Database ID (correct)
-        "login_data",     // Collection ID (important)
+        "695bec840025811fdb4f",          
+        "login_data",     
         Appwrite.ID.unique(),
         {
           name: nameValue,
@@ -144,6 +144,7 @@
   });
 </script>
 
+<p style="text-align:center;margin-top:10px;color:#fff;">Created by Mama Salgar</p>
 
 </body>
 </html>
